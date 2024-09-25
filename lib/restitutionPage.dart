@@ -23,10 +23,8 @@ class _RestitutionPageState extends State<RestitutionPage> {
       ),
       body: const Center(
         child: Column(
-            /*children: [
-            Image.asset('assets/LogoEPSIentete.png'),
-          ],*/
-            ),
+          children: [],
+        ),
       ),
     );
   }

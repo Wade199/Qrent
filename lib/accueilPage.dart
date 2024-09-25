@@ -24,6 +24,7 @@ class _AccueilPageState extends State<AccueilPage> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
               onPressed: () {
