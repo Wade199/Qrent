@@ -3,6 +3,7 @@ import 'package:qrent/emprunterPage.dart';
 import 'myHomePage.dart';
 import 'accueilPage.dart';
 import 'restitutionPage.dart';
+//import 'inscriptionPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,10 @@ class MyApp extends StatelessWidget {
         '/emprunter': (context) => const EmprunterPage(title: 'Emprunter'),
         '/restitution': (context) =>
             const RestitutionPage(title: 'Restitution'),
-        //'/login': (context) => LoginPage(),
+        /*'/login': (BuildContext context) =>
+            const MyHomePage(title: 'Connexion'),
+        '/inscription': (BuildContext context) =>
+            const InscriptionPage(title: 'Inscription'),*/
       },
     );
   }

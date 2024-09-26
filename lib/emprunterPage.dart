@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class EmprunterPage extends StatefulWidget {
-  const EmprunterPage({Key? key, required this.title}) : super(key: key);
+  const EmprunterPage({super.key, required this.title});
 
   final String title;
 
@@ -14,10 +14,10 @@ class EmprunterPage extends StatefulWidget {
 }
 
 class _EmprunterPageState extends State<EmprunterPage> {
-  int? produitId;
+  String? materielId;
   bool produitFound = false;
   Map<String, dynamic>? _produitData;
-  TextEditingController _IdController = TextEditingController();
+  TextEditingController _idController = TextEditingController();
   bool empruntValide = false;
   int etudiantId = 71;
   String? scannedQRCode;
@@ -27,16 +27,18 @@ class _EmprunterPageState extends State<EmprunterPage> {
     super.initState();
   }
 
-  fetchProduit(String reference) async {
+  fetchProduit(String id) async {
     try {
+      print(id);
       final response = await http.get(
         Uri.parse(
-            'https://s3-4295.nuage-peda.fr/Qrent/public/api/produit/{$produitId}'),
+            'https://s3-4295.nuage-peda.fr/Qrent/public/api/materiels/$id'),
       );
       if (response.statusCode == 200) {
         setState(() {
           _produitData = convert.jsonDecode(response.body);
           produitFound = true;
+          materielId = id;
         });
       } else {
         setState(() {
@@ -51,7 +53,7 @@ class _EmprunterPageState extends State<EmprunterPage> {
   }
 
   Future<http.Response> validerEmprunt(
-      Int produitId, int etudiantId, String dateRetour) {
+      int produitId, int etudiantId, String dateRetour) {
     return http.post(
       Uri.parse('https://s3-4295.nuage-peda.fr/Qrent/public/api/emprunts/'),
       headers: <String, String>{'Content-Type': 'application/ld+json'},
@@ -97,7 +99,7 @@ class _EmprunterPageState extends State<EmprunterPage> {
   /*
   Future<void> _scanQRCode() async {
     setState(() {
-      scannedQRCode = "QR123456789"; // Simule un QR code scanné
+      scannedQRCode = "QR123456789"; 
     });
   }*/
 
@@ -158,7 +160,7 @@ class _EmprunterPageState extends State<EmprunterPage> {
               style: const TextStyle(fontSize: 16),
             ),
             TextField(
-              controller: _IdController,
+              controller: _idController,
               decoration: const InputDecoration(
                 labelText: "Référence du produit",
                 border: OutlineInputBorder(),
@@ -167,7 +169,7 @@ class _EmprunterPageState extends State<EmprunterPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                fetchProduit(_IdController.text);
+                fetchProduit(_idController.text);
               },
               child: const Text(
                 "Rechercher le produit",
