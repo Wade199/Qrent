@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qrent/emprunterPage.dart';
+import 'SplashScreen.dart';
 import 'myHomePage.dart';
 import 'accueilPage.dart';
 import 'restitutionPage.dart';
@@ -15,17 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Qrent',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Qrent'),
+      home: SplashScreen(),
       routes: {
-        '/accueil': (context) => const AccueilPage(title: 'Accueil'),
-        '/emprunter': (context) => const EmprunterPage(title: 'Emprunter'),
+        '/accueil': (context) => const AccueilPage(title: ''),
+        '/emprunter': (context) => const EmprunterPage(title: ''),
         '/restitution': (context) =>
-            const RestitutionPage(title: 'Restitution'),
+            const RestitutionPage(title: ''),
+        '/myHomePage': (context) =>
+        const MyHomePage(title: ''),
         /*'/login': (BuildContext context) =>
             const MyHomePage(title: 'Connexion'),
         '/inscription': (BuildContext context) =>
